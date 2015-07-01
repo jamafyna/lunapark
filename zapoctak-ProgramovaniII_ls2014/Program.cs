@@ -6,13 +6,14 @@ using System.Windows.Forms;
 using System.Drawing;
 
 
+
 namespace zapoctak_ProgramovaniII_ls2014
 {    
     public enum Direction {N,S,W,E,no};//smer
-
+     
     static class Program
     {
-
+        
         public const int pricePStones = 190;
         public const int pricePAsphalt = 200;
         public const int pricePSand = 195;
