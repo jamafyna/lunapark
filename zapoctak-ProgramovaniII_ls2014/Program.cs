@@ -599,7 +599,9 @@ namespace zapoctak_ProgramovaniII_ls2014
             int pom;
             switch (stav)
             {
+                
                 case Stav.cekaNaLidi:
+                    #region
                     {
                         pom = PocetLidiVeFronte();
                         if (pom >= 0.8 * kapacita || (casCekani >= maxDobaCekani && pom > 0))
@@ -616,7 +618,9 @@ namespace zapoctak_ProgramovaniII_ls2014
                         hlform.pocetPenez_label.Text = hlform.evidence.pocetPenez.ToString();
                     }
                     break;
+                #endregion
                 case Stav.bezi:
+                    #region
                     {
                         if (casBehu >= dobaToceni)
                         {
@@ -631,7 +635,9 @@ namespace zapoctak_ProgramovaniII_ls2014
                         hlform.pocetPenez_label.Text = hlform.evidence.pocetPenez.ToString();
                     }
                     break;
+                    #endregion
                 case Stav.dobiha:
+                    #region
                     {
                         
                         if (PocetLidiVeFronte() == 0 && (!bezi)) //!bezi-aby se nezmenilo, kdyz uzivatel klikne uprostred behu
@@ -651,15 +657,12 @@ namespace zapoctak_ProgramovaniII_ls2014
                         hlform.pocetPenez_label.Text = hlform.evidence.pocetPenez.ToString();
                     }
                     break;
+                #endregion
                 case Stav.mimoProvoz: //nic se nedela
                     break;
                 default:
                     break;
-            }
-        
-        
-        
-        
+            }       
         }
 
         public void zmenStav(Stav st)

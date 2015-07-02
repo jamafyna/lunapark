@@ -57,6 +57,7 @@
     <Compile Include="AtrakceInfoForm.Designer.cs">
       <DependentUpon>AtrakceInfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="BasicComponents.cs" />
     <Compile Include="ChodnikForm.cs">
       <SubType>Form</SubType>
     </Compile>

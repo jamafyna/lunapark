@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace zapoctak_ProgramovaniII_ls2014
 {
-    class Amusements
-    {
-    }
+    
+
 }
