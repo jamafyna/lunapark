@@ -6,11 +6,39 @@ using System.Windows.Forms;
 using System.Drawing;
 
 
-
 namespace zapoctak_ProgramovaniII_ls2014
 {    
     public enum Direction {N,S,W,E,no};//smer
      
+    
+    public class ExponentialRandom{
+        System.IO.StreamWriter writer = new System.IO.StreamWriter("expGen.txt");//TODO: Jen pro debug ucelu
+        public double lambda;
+        Random rand;
+        public ExponentialRandom() {
+            rand = new Random();
+        }
+        public ExponentialRandom(int seed) {
+            rand = new Random(seed);
+        }
+        public ExponentialRandom(Random rnd, double lambda) {
+            rand = rnd;
+            this.lambda = lambda;
+           
+        }
+        public double NextDouble(){
+            return Math.Log(1 - rand.NextDouble()) / (-lambda);     
+        }
+        public int NextInt() {
+            int temp=(int)(Math.Log(1 - rand.NextDouble()) / (-lambda));           
+            writer.WriteLine(temp);
+            return temp;
+        }
+        public void Destruct() {
+            writer.Close();
+        }
+        
+    }
     static class Program
     {
         
@@ -24,7 +52,7 @@ namespace zapoctak_ProgramovaniII_ls2014
         public const int priceFountain = 750;//fontána
         public const int priceTree = 150;
         public const int sizeOfSquare = 50;//rozměr políčka
-        
+       
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -38,7 +66,7 @@ namespace zapoctak_ProgramovaniII_ls2014
 
         }
         //funkce rozhodujici o vyrobe cloveka
-        public static bool pstniFceVyroby(Random rnd, int attractionCount, int celkovaLakavost, int pocetLidi, int vstupne, int propagace)
+       /* public static bool pstniFceVyroby(Random rnd, int attractionCount, int celkovaLakavost, int pocetLidi, int vstupne, int propagace)
         {
             if (attractionCount == 1) return false; //pokud neni v parku zadna atrakce - 1 nebot se pocita i brana do poctu atrakci
             int cislo = rnd.Next(1, 1001);//na procenta
@@ -49,8 +77,22 @@ namespace zapoctak_ProgramovaniII_ls2014
             int c = Math.Max(Math.Min(propagace, 100), 0); //vstupne je omezeno hranici 100, tj. maximalne
            
             if ((cislo + a + b - (vstupne ^ 2)/50) + c > 1000) return true; 
-            else return false;
-           
+            else return false;          
+        }*/
+        static int exponencPOKUS;
+        public static bool pstniFceVyroby(ExponentialRandom expRand,int attractionCount, int celkovaLakavost, int pocetLidi, int vstupne, int propagace){
+            if (attractionCount == 1) return false; //pokud neni v parku zadna atrakce - 1 nebot se pocita i brana do poctu atrakci           
+            exponencPOKUS--;
+            if (exponencPOKUS > 0) return false;
+            else {
+                
+                int b = Math.Min(celkovaLakavost, 700); //minimalne 100
+                int c = Math.Max(Math.Min(propagace, 100), 0); //vstupne je omezeno hranici 100, tj. maximalne
+
+                double lambda = Math.Max(1, 30);//-Math.Min(attractionCount,15)/4-b/128-c/128+vstupne/8);
+                exponencPOKUS = expRand.NextInt();
+              
+                return true; }      
         }
         
     }
@@ -1092,9 +1134,12 @@ namespace zapoctak_ProgramovaniII_ls2014
             LSSfrontyLidi.SmazVseKromeHlavy(); //maze vsechny lidi, ktere k ni dosli, tj. opousti park
             
             Clovek clovek; //rozhoduje, zda se vyrobi novy clovek
-            if (Program.pstniFceVyroby(hlform.random, hlform.evidence.pocetAtrakci, hlform.evidence.lakavost, hlform.evidence.aktualniPocetLidi,vstupneDoParku, hlform.evidence.propagaceCislo) //misto 100 bude spokojenost
+           /* if (Program.pstniFceVyroby(hlform.random, hlform.evidence.pocetAtrakci, hlform.evidence.lakavost, hlform.evidence.aktualniPocetLidi,vstupneDoParku, hlform.evidence.propagaceCislo) //misto 100 bude spokojenost
                 && hlform.evidence.mapaAtrakciAChodniku.jeChodnik(vstupX + Program.sizeOfSquare, vstupY)
-                )
+                )*/
+            if (Program.pstniFceVyroby(hlform.evidence.expRnd, hlform.evidence.pocetAtrakci, hlform.evidence.lakavost, hlform.evidence.aktualniPocetLidi, vstupneDoParku, hlform.evidence.propagaceCislo) //misto 100 bude spokojenost
+               && hlform.evidence.mapaAtrakciAChodniku.jeChodnik(vstupX + Program.sizeOfSquare, vstupY)
+               )
             {
                 clovek = new Clovek(hlform);
                 hlform.evidence.pocetPenez += vstupneDoParku;
@@ -1569,6 +1614,7 @@ namespace zapoctak_ProgramovaniII_ls2014
         public LSSClovek lideLSS; //LSS vsech lidi v parku
         public LSSAtrakce obcerstveniLSS; //LSS vsech obcerstveni v parku - jsou ulozena i v LSSAtrakce
         public LSSeznam<Policko> ostatniLSS; //pro moznost smazani pri nove hre
+        public ExponentialRandom expRnd = new ExponentialRandom();
 
         public Evidence(int sirka,int vyska)
         {

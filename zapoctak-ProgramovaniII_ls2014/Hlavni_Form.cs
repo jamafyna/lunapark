@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -491,7 +485,8 @@ namespace zapoctak_ProgramovaniII_ls2014
     private void Hlavni_Form_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult dotaz = MessageBox.Show("Chcete opravdu skončit aplikaci?", "Varování", MessageBoxButtons.YesNo);
-            if (dotaz == DialogResult.No) e.Cancel=true;
+            if (dotaz == DialogResult.No) e.Cancel = true;
+            else evidence.expRnd.Destruct(); 
         }
 
     private void propagace_button_Click(object sender, EventArgs e)
