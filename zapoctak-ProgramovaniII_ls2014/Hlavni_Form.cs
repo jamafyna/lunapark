@@ -486,7 +486,7 @@ namespace zapoctak_ProgramovaniII_ls2014
         {
             DialogResult dotaz = MessageBox.Show("Chcete opravdu skončit aplikaci?", "Varování", MessageBoxButtons.YesNo);
             if (dotaz == DialogResult.No) e.Cancel = true;
-            else evidence.expRnd.Destruct(); 
+            
         }
 
     private void propagace_button_Click(object sender, EventArgs e)

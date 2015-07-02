@@ -9,36 +9,56 @@ using System.Drawing;
 namespace zapoctak_ProgramovaniII_ls2014
 {    
     public enum Direction {N,S,W,E,no};//smer
-     
-    
-    public class ExponentialRandom{
-        System.IO.StreamWriter writer = new System.IO.StreamWriter("expGen.txt");//TODO: Jen pro debug ucelu
-        public double lambda;
+
+
+    public class ExponentialRandom
+    {
+        public double lambda { get; set; }
         Random rand;
-        public ExponentialRandom() {
+        public ExponentialRandom()
+        {
             rand = new Random();
         }
-        public ExponentialRandom(int seed) {
+        public ExponentialRandom(int seed)
+        {
             rand = new Random(seed);
         }
-        public ExponentialRandom(Random rnd, double lambda) {
-            rand = rnd;
-            this.lambda = lambda;
-           
+
+        public double NextDouble()
+        {
+            return (Math.Log(1 - rand.NextDouble()) * (-lambda));
         }
-        public double NextDouble(){
-            return Math.Log(1 - rand.NextDouble()) / (-lambda);     
+        public int NextInt()
+        {
+            return (int)(0.5 + Math.Log(1 - rand.NextDouble()) * (-lambda));//0.5 due to rounding (zaokrouhlovani)
         }
-        public int NextInt() {
-            int temp=(int)(Math.Log(1 - rand.NextDouble()) / (-lambda));           
-            writer.WriteLine(temp);
-            return temp;
-        }
-        public void Destruct() {
-            writer.Close();
-        }
-        
     }
+    public class ProbabilityGenerationPeople
+    { //predpoklada, ze se brana pta jednou za 1s, mozna pridat do konstruktoru
+        private ExponentialRandom expRnd;
+        private int waitingTime = 0;
+
+        public ProbabilityGenerationPeople()
+        {
+            expRnd = new ExponentialRandom();
+        }
+        public bool ShouldGenerateNewPerson()
+        { //todo: sem patri vsechny faktory, ktere ovlivnuji tvorbu lidi
+            waitingTime--;
+            if (waitingTime < 0)
+            {
+                expRnd.lambda = CalculateLambda();
+                waitingTime = expRnd.NextInt();
+                return true;
+            }
+            return false;
+        }
+        private double CalculateLambda()
+        {//todo: stejne parametry jako ShouldGenerateNewPerson
+            throw new NotImplementedException();
+        }
+    }
+    
     static class Program
     {
         
@@ -66,7 +86,7 @@ namespace zapoctak_ProgramovaniII_ls2014
 
         }
         //funkce rozhodujici o vyrobe cloveka
-       /* public static bool pstniFceVyroby(Random rnd, int attractionCount, int celkovaLakavost, int pocetLidi, int vstupne, int propagace)
+        public static bool pstniFceVyroby(Random rnd, int attractionCount, int celkovaLakavost, int pocetLidi, int vstupne, int propagace)
         {
             if (attractionCount == 1) return false; //pokud neni v parku zadna atrakce - 1 nebot se pocita i brana do poctu atrakci
             int cislo = rnd.Next(1, 1001);//na procenta
@@ -78,22 +98,8 @@ namespace zapoctak_ProgramovaniII_ls2014
            
             if ((cislo + a + b - (vstupne ^ 2)/50) + c > 1000) return true; 
             else return false;          
-        }*/
-        static int exponencPOKUS;
-        public static bool pstniFceVyroby(ExponentialRandom expRand,int attractionCount, int celkovaLakavost, int pocetLidi, int vstupne, int propagace){
-            if (attractionCount == 1) return false; //pokud neni v parku zadna atrakce - 1 nebot se pocita i brana do poctu atrakci           
-            exponencPOKUS--;
-            if (exponencPOKUS > 0) return false;
-            else {
-                
-                int b = Math.Min(celkovaLakavost, 700); //minimalne 100
-                int c = Math.Max(Math.Min(propagace, 100), 0); //vstupne je omezeno hranici 100, tj. maximalne
-
-                double lambda = Math.Max(1, 30);//-Math.Min(attractionCount,15)/4-b/128-c/128+vstupne/8);
-                exponencPOKUS = expRand.NextInt();
-              
-                return true; }      
         }
+        
         
     }
 
@@ -1134,10 +1140,8 @@ namespace zapoctak_ProgramovaniII_ls2014
             LSSfrontyLidi.SmazVseKromeHlavy(); //maze vsechny lidi, ktere k ni dosli, tj. opousti park
             
             Clovek clovek; //rozhoduje, zda se vyrobi novy clovek
-           /* if (Program.pstniFceVyroby(hlform.random, hlform.evidence.pocetAtrakci, hlform.evidence.lakavost, hlform.evidence.aktualniPocetLidi,vstupneDoParku, hlform.evidence.propagaceCislo) //misto 100 bude spokojenost
-                && hlform.evidence.mapaAtrakciAChodniku.jeChodnik(vstupX + Program.sizeOfSquare, vstupY)
-                )*/
-            if (Program.pstniFceVyroby(hlform.evidence.expRnd, hlform.evidence.pocetAtrakci, hlform.evidence.lakavost, hlform.evidence.aktualniPocetLidi, vstupneDoParku, hlform.evidence.propagaceCislo) //misto 100 bude spokojenost
+          
+            if (Program.pstniFceVyroby(hlform.random, hlform.evidence.pocetAtrakci, hlform.evidence.lakavost, hlform.evidence.aktualniPocetLidi, vstupneDoParku, hlform.evidence.propagaceCislo) //misto 100 bude spokojenost
                && hlform.evidence.mapaAtrakciAChodniku.jeChodnik(vstupX + Program.sizeOfSquare, vstupY)
                )
             {
