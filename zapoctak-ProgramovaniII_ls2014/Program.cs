@@ -79,7 +79,7 @@ namespace zapoctak_ProgramovaniII_ls2014
         [STAThread]
         static void Main()
         {
-           // System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("cs-CZ");
+          //  System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("cs-CZ");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Hlavni_Form());

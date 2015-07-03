@@ -88,11 +88,11 @@
             this.textBox1Rozmer.BackColor = System.Drawing.SystemColors.Control;
             this.textBox1Rozmer.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1Rozmer.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox1Rozmer.Location = new System.Drawing.Point(6, 18);
+            this.textBox1Rozmer.Location = new System.Drawing.Point(3, 18);
             this.textBox1Rozmer.Name = "textBox1Rozmer";
             this.textBox1Rozmer.Size = new System.Drawing.Size(220, 19);
             this.textBox1Rozmer.TabIndex = 5;
-            this.textBox1Rozmer.Text = Labels.sizeOfMap;
+            this.textBox1Rozmer.Text = "SIZE OF A PLAYING MAP";
             this.textBox1Rozmer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // radioButton60
