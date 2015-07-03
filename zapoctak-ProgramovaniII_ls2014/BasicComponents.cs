@@ -64,6 +64,10 @@ namespace zapoctak_ProgramovaniII_ls2014
         
         
     }
+    public abstract class SquareAmusements : Amusements { }
+   /// <summary>
+   /// Class for rectangle, not square, amusements. It can have a different orientation.
+   /// </summary>
     public abstract class RectangleAmusements : Amusements { }
 
 }
