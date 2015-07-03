@@ -31,4 +31,7 @@ D:\me-programy\C#2\zapoctak-ProgramovaniII_ls2014\zapoctak-ProgramovaniII_ls2014
 D:\me-programy\C#2\zapoctak-ProgramovaniII_ls2014\zapoctak-ProgramovaniII_ls2014\obj\Debug\zapoctak_ProgramovaniII_ls2014.Properties.Resources.resources
 D:\me-programy\C#2\zapoctak-ProgramovaniII_ls2014\zapoctak-ProgramovaniII_ls2014\obj\Debug\zapoctak_ProgramovaniII_ls2014.RozhodovaciForm.resources
 D:\me-programy\C#2\zapoctak-ProgramovaniII_ls2014\zapoctak-ProgramovaniII_ls2014\obj\Debug\zapoctak-ProgramovaniII_ls2014.csproj.GenerateResource.Cache
-D:\me-programy\C#2\zapoctak-ProgramovaniII_ls2014\zapoctak-ProgramovaniII_ls2014\obj\Debug\zapoctak_ProgramovaniII_ls2014.Resources.Labels.resources
+D:\me-programy\C#2\zapoctak-ProgramovaniII_ls2014\zapoctak-ProgramovaniII_ls2014\bin\Debug\cs-CZ\zapoctak-ProgramovaniII_ls2014.resources.dll
+D:\me-programy\C#2\zapoctak-ProgramovaniII_ls2014\zapoctak-ProgramovaniII_ls2014\obj\Debug\zapoctak_ProgramovaniII_ls2014.Labels.resources
+D:\me-programy\C#2\zapoctak-ProgramovaniII_ls2014\zapoctak-ProgramovaniII_ls2014\obj\Debug\zapoctak_ProgramovaniII_ls2014.Labels.cs-CZ.resources
+D:\me-programy\C#2\zapoctak-ProgramovaniII_ls2014\zapoctak-ProgramovaniII_ls2014\obj\Debug\cs-CZ\zapoctak-ProgramovaniII_ls2014.resources.dll
