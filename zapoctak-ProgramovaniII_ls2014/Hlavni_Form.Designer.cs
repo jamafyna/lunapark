@@ -92,7 +92,7 @@
             this.textBox1Rozmer.Name = "textBox1Rozmer";
             this.textBox1Rozmer.Size = new System.Drawing.Size(220, 19);
             this.textBox1Rozmer.TabIndex = 5;
-            this.textBox1Rozmer.Text = "SIZE OF A PLAYING MAP";
+            this.textBox1Rozmer.Text = Labels.sizeOfMap;
             this.textBox1Rozmer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // radioButton60
