@@ -78,7 +78,7 @@ namespace zapoctak_ProgramovaniII_ls2014
             MouseEventArgs mys = (MouseEventArgs)e;
             int x = mys.X - mys.X % Program.sizeOfSquare; 
             int y = mys.Y - mys.Y % Program.sizeOfSquare;
-
+          
             switch (vybranoStavit)
             {
                 case stavba.nic: //nic se neudela
