@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace zapoctak_ProgramovaniII_ls2014
 {
+   //-----
+   // MODEL, nebo alespoň něco z toho
+   //-----
+
     public class MyDebugException : Exception {
         public MyDebugException():base() { }
         public MyDebugException(string s) : base(s) { }
