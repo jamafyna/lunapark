@@ -33,15 +33,7 @@ namespace zapoctak_ProgramovaniII_ls2014
             return (int)(0.5 + Math.Log(1 - rand.NextDouble()) * (-lambda));//0.5 due to rounding (zaokrouhlovani)
         }
     }
-    public class Model {
-        
-        Queue<MapObjects> dirtyChange;
-        Queue<MapObjects> dirtyNew;
-        Queue<MapObjects> dirtyDestruct;//pouze pbox.Destruct, mozna jen zadat souradnice
-        Queue<Person> dirtyPersonMove;//lepe
-    
-    
-    }
+   
     public class ProbabilityGenerationPeople
     { //predpoklada, ze se brana pta jednou za 1s, mozna pridat do konstruktoru
         private ExponentialRandom expRnd;
@@ -227,16 +219,17 @@ namespace zapoctak_ProgramovaniII_ls2014
         {
             hlform = form;
         }
-
+        
         public Policko(int x, int y, Hlavni_Form form)
         {
             hlform = form;
             Umisti(x,y);
             pbox.Click += new EventHandler(Click);
+
+           
             form.evidence.mapaAtrakciAChodniku.pridej(x,y,this);
             pbox.Parent = hlform.pictureBox1;            
         }
-
         
         public void Umisti(int x, int y)
         {
@@ -252,6 +245,7 @@ namespace zapoctak_ProgramovaniII_ls2014
         }
         protected virtual void Click(object sender, EventArgs e)
         {
+
             if (hlform.zbor)
             {
                 
